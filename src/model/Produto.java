@@ -29,6 +29,23 @@ public class Produto {
 			+ "com protetor de botões, 1 bolso sobreposto no peito esquerdo, 2 bolsos sobrepostos inferiores";
 	*/
 	
+	public Produto () {};
+	
+	public Produto (String descricao, String mangas, String consumoTecido, String consumoAviamentos, String costureira, String acabamento, String faixasRefletivas, String golaPunho, String sugestaoPreco, String outrasDescricoes) {
+		
+		this.descricao = descricao;
+		this.mangas = mangas;
+		this.consumoTecido = consumoTecido;
+		this.consumoAviamentos = consumoAviamentos;
+		this.costureira = costureira;
+		this.acabamento = acabamento;
+		this.faixasRefletivas = faixasRefletivas;
+		this.golaPunho = golaPunho;
+		this.sugestaoPreco = sugestaoPreco;
+		this.outrasDescricoes = outrasDescricoes;
+		
+	};
+	
 	public String getDescricao() {
 		return descricao;
 	}

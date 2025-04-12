@@ -40,7 +40,7 @@ public class JPrincipal extends JFrame {
 	 */
 	public JPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 758, 551);
+		setBounds(100, 100, 858, 551);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -57,17 +57,17 @@ public class JPrincipal extends JFrame {
 		textField.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(41, 119, 665, 291);
+		scrollPane.setBounds(10, 119, 822, 291);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
-		scrollPane.setColumnHeaderView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"OutrasDesc", "Pre\u00E7oSug", "Gola/Punho", "FaixasRefletivas", "Acabamento", "Costureira", "C. Aviamentos", "C.Tecido", "Mangas", "Descri\u00E7\u00E3o"
+				"Descrição", "Mangas", "Con. Tecido", "Con. Aviamentos", "Costureira", "Acabamento", "Faixas Ref.", "Gola/Punho", "Sug. Preço", "Outras Desc."
 			}
 		));
+		scrollPane.setViewportView(table);
 	}
 }
