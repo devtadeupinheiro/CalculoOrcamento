@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Produto {
 	
+	private int id;
 	private String descricao;
 	private String mangas;
 	private String consumoTecido;
@@ -31,8 +32,9 @@ public class Produto {
 	
 	public Produto () {};
 	
-	public Produto (String descricao, String mangas, String consumoTecido, String consumoAviamentos, String costureira, String acabamento, String faixasRefletivas, String golaPunho, String sugestaoPreco, String outrasDescricoes) {
+	public Produto (int id, String descricao, String mangas, String consumoTecido, String consumoAviamentos, String costureira, String acabamento, String faixasRefletivas, String golaPunho, String sugestaoPreco, String outrasDescricoes) {
 		
+		this.id = id;
 		this.descricao = descricao;
 		this.mangas = mangas;
 		this.consumoTecido = consumoTecido;
@@ -46,6 +48,13 @@ public class Produto {
 		
 	};
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getDescricao() {
 		return descricao;
 	}
