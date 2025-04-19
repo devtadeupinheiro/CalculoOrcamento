@@ -61,7 +61,7 @@ public class ConexaoJdbc {
 			
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			System.out.println("Erro ao conectar com o banco de dados" + e.getMessage());
 			
 			//colocar sistema de log
 			
@@ -80,8 +80,7 @@ public class ConexaoJdbc {
 				
 			} catch (SQLException e) {
 				
-				e.printStackTrace();
-				
+				System.out.println("Erro ao fechar a conexão" + e.getMessage());
 				//Colocar sistema de log
 			}
 			
