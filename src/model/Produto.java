@@ -130,4 +130,14 @@ public class Produto {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", descricao=" + descricao + ", mangas=" + mangas + ", consumoTecido="
+				+ consumoTecido + ", consumoAviamentos=" + consumoAviamentos + ", costureira=" + costureira
+				+ ", acabamento=" + acabamento + ", faixasRefletivas=" + faixasRefletivas + ", golaPunho=" + golaPunho
+				+ ", sugestaoPreco=" + sugestaoPreco + ", outrasDescricoes=" + outrasDescricoes + "]";
+	}
+	
+	
+
 }

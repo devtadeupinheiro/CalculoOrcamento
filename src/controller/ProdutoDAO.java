@@ -58,7 +58,7 @@ public class ProdutoDAO {
 			stmt.setString(i++, produto.getSugestaoPreco());
 			stmt.setString(i++, produto.getOutrasDescricoes());
 			stmt.execute();
-			con.commit();
+			//con.commit(); //Tirei esse código porque o autocommit está ligado
 			
 			JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
 			

@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controller.ProdutoDAO;
 import model.ModeloTabela;
 import model.Produto;
 
@@ -45,10 +46,17 @@ public class JPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public JPrincipal() {
-		produtos = new ArrayList<>();
-		produtos.add(new Produto(1, "BATA ABERTA", "MANGA LONGA", "1.4", "2.2", "4.5", "1", "3.3", "0", "94.90", "Gola simples, 1 bolso sobreposto peito esquerdo"));
-		produtos.add(new Produto(2, "BATA POLO", "MANGA CURTA", "1.4", "2.2", "4.5", "1", "3.3", "0", "94.90", "Gola simples, 1 bolso sobreposto peito esquerdo"));
-		produtos.add(new Produto(3, "BATA GOLA V", "MANGA LONGA", "1.4", "2.2", "4.5", "1", "3.3", "0", "94.90", "Gola simples, 1 bolso sobreposto peito esquerdo"));
+		
+		var produtoDao = new ProdutoDAO();
+		try {
+			
+			produtos = produtoDao.listarClientes();
+		
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 858, 551);
