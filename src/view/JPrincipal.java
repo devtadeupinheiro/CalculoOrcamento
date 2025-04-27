@@ -1,6 +1,10 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -48,13 +52,14 @@ public class JPrincipal extends JFrame {
 	public JPrincipal() {
 		
 		var produtoDao = new ProdutoDAO();
-		try {
-			
-			produtos = produtoDao.listarClientes();
 		
-		} catch (Exception e) {
+			try {
+				
+				produtos = produtoDao.listarClientes();
 			
-			e.printStackTrace();
+			} catch (Exception e) {
+				
+				e.printStackTrace();
 			
 		}
 		
@@ -67,6 +72,18 @@ public class JPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Cadastrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				var jCadastro = new JCadastro(null); //Está nulo porque não é para atualização e sim para inclusão. Pois o construtor pede um produto como parametro
+				jCadastro.setLocationRelativeTo(jCadastro); //Para abrir no centro
+				jCadastro.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //Fecha somente a tela de cadastro ao invés do sistema inteiro
+				jCadastro.setVisible(true);
+				
+			}
+		});
 		btnNewButton.setBounds(41, 42, 81, 23);
 		contentPane.add(btnNewButton);
 		
@@ -90,6 +107,33 @@ public class JPrincipal extends JFrame {
 				"Descrição", "Mangas", "Con. Tecido", "Con. Aviamentos", "Costureira", "Acabamento", "Faixas Ref.", "Gola/Punho", "Sug. Preço", "Outras Desc."
 			}
 		));*/
+		table.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				if (e.getButton() == 1)	{ //1 é o botão esquerdo, 2 o scroll e 3 o botão direito
+					
+					try {
+						
+						//Pega a linha selecionada da tabela
+						Produto produtoSelecionado = produtoDao.consultarProduto(modeloTabela.getValueAt(table.getSelectedRow(), 0).toString());
+						var jCadastro = new JCadastro(produtoSelecionado);
+						jCadastro.setLocationRelativeTo(jCadastro); //Para abrir no centro
+						jCadastro.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //Fecha somente a tela de cadastro ao invés do sistema inteiro
+						jCadastro.setVisible(true);
+						
+					} catch (Exception e1) {
+						
+						e1.printStackTrace();
+						
+					}
+					
+				}
+				
+			}
+			
+		});
 		scrollPane.setViewportView(table);
 	}
 }

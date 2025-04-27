@@ -74,17 +74,16 @@ public class ProdutoDAO {
 		
 	}
 	
-	public Produto consultarProduto (int id) throws Exception {
+	public Produto consultarProduto (String id) throws Exception {
 		
 		this.con = conectarBanco();
 		Produto produto = null;
 		String sql = "SELECT * FROM produto WHERE id = ?";
-		String idTexto = ((Integer) id).toString();
 		
 		try {
 			
 			stmt = this.con.prepareStatement(sql);
-			stmt.setString(1, idTexto); //No exemplo usa int i = 0 e declara i++ no lugar do índice "1". Não entendi o sentido e coloquei 1 direto.
+			stmt.setString(1, id); //No exemplo usa int i = 0 e declara i++ no lugar do índice "1". Não entendi o sentido e coloquei 1 direto.
 			//Ao acrescentar o atribudot ID no Produto, percebi que precisaria alterar todos os índices de todos os métodos. Com o i++ não é necessário,
 			//altera somente o i.
 			resultSet = stmt.executeQuery();

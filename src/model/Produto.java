@@ -48,6 +48,21 @@ public class Produto {
 		
 	};
 	
+	public Produto (String descricao, String mangas, String consumoTecido, String consumoAviamentos, String costureira, String acabamento, String faixasRefletivas, String golaPunho, String sugestaoPreco, String outrasDescricoes) {
+		
+		this.descricao = descricao;
+		this.mangas = mangas;
+		this.consumoTecido = consumoTecido;
+		this.consumoAviamentos = consumoAviamentos;
+		this.costureira = costureira;
+		this.acabamento = acabamento;
+		this.faixasRefletivas = faixasRefletivas;
+		this.golaPunho = golaPunho;
+		this.sugestaoPreco = sugestaoPreco;
+		this.outrasDescricoes = outrasDescricoes;
+		
+	};
+	
 	
 	public int getId() {
 		return id;
