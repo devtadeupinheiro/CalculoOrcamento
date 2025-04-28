@@ -1,5 +1,7 @@
 package testes;
 
+import org.postgresql.util.PSQLException;
+
 import controller.*;
 import main.Calculos;
 import model.*;
@@ -10,7 +12,8 @@ public class TesteProdutoDAO {
 		var produtoPersistencia = new ProdutoDAO();
 		var produtoTeste = new Produto();
 		
-		produtoTeste.setDescricao("BATA MODELO ABERTA");
+		//TESTE INCLUIR PRODUTO
+		/*produtoTeste.setDescricao("BATA MODELO ABERTA");
 		produtoTeste.setMangas("MANGA LONGA");
 		produtoTeste.setConsumoTecido("1.4");
 		produtoTeste.setConsumoAviamentos("1.22");
@@ -25,6 +28,25 @@ public class TesteProdutoDAO {
 		
 		produtoPersistencia.inserirProduto(produtoTeste);
 		System.out.println(produtoTeste.toString());		
+		*/
+		
+		//TESTE CONSULTA PRODUTO
+		/*
+		try {
+			
+			produtoTeste = produtoPersistencia.consultarProduto("8");
+			System.out.println(produtoTeste.toString());
+			
+		} catch (PSQLException e) {
+			
+			System.out.println(e.getMessage());
+			
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+			
+		}
+		*/
 		
 	}
 
