@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/tadeu/Downloads/postgresql-42.7.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tadeu/Downloads/postgresql-42.7.5.jar" sourcepath="C:/Projetos/eclipse-workspace/CalculoOrcamento"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

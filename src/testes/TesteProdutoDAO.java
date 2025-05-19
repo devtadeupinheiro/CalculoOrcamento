@@ -48,6 +48,19 @@ public class TesteProdutoDAO {
 		}
 		*/
 		
+		//TESTE EXCLUIR PRODUTO
+		/*
+		try {
+			
+			produtoPersistencia.excluirProduto(9);
+						
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+			
+		}
+		*/
+		
 	}
 
 }

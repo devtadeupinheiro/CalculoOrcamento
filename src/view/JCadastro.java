@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class JCadastro extends JFrame {
 
@@ -24,13 +25,13 @@ public class JCadastro extends JFrame {
 	private JTextField textFieldConsumoTecido;
 	private JTextField textFieldCostureira;
 	private JTextField textFieldAcabamento;
-	private JLabel lblCostureira_2;
+	private JLabel lblFaixasRefletivas;
 	private JTextField textFieldFaixasRefletivas;
-	private JLabel lblCostureira_3;
+	private JLabel lblGolaPunho;
 	private JTextField textFieldGolaPunho;
 	private JLabel lblSugestoR;
 	private JTextField textFieldSugestaoPreco;
-	private JLabel lblCostureira_5;
+	private JLabel lblOutrasDescricoes;
 	private JTextField textFieldOutrasDescricoes;
 	private JTextField textFieldConsumoAviamentos;
 
@@ -54,6 +55,9 @@ public class JCadastro extends JFrame {
 	 * Create the frame.
 	 */
 	public JCadastro(Produto produtoSelecionado) {
+		
+		var produtoDAO = new ProdutoDAO();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 473, 363);
 		contentPane = new JPanel();
@@ -89,6 +93,15 @@ public class JCadastro extends JFrame {
 		textFieldConsumoTecido.setBounds(179, 91, 116, 20);
 		contentPane.add(textFieldConsumoTecido);
 		
+		JLabel lblConsumoAviamentos = new JLabel("Consumo Aviamentos");
+		lblConsumoAviamentos.setBounds(308, 66, 116, 14);
+		contentPane.add(lblConsumoAviamentos);
+		
+		textFieldConsumoAviamentos = new JTextField();
+		textFieldConsumoAviamentos.setColumns(10);
+		textFieldConsumoAviamentos.setBounds(308, 91, 116, 20);
+		contentPane.add(textFieldConsumoAviamentos);	
+		
 		JLabel lblCostureira = new JLabel("Costureira");
 		lblCostureira.setBounds(32, 125, 86, 14);
 		contentPane.add(lblCostureira);
@@ -98,27 +111,27 @@ public class JCadastro extends JFrame {
 		textFieldCostureira.setBounds(32, 150, 86, 20);
 		contentPane.add(textFieldCostureira);
 		
-		JLabel lblCostureira_1 = new JLabel("Acabamento");
-		lblCostureira_1.setBounds(134, 125, 86, 14);
-		contentPane.add(lblCostureira_1);
+		JLabel lblAcabamento = new JLabel("Acabamento");
+		lblAcabamento.setBounds(134, 125, 86, 14);
+		contentPane.add(lblAcabamento);
 		
 		textFieldAcabamento = new JTextField();
 		textFieldAcabamento.setColumns(10);
 		textFieldAcabamento.setBounds(134, 150, 86, 20);
 		contentPane.add(textFieldAcabamento);
 		
-		lblCostureira_2 = new JLabel("Faixas Refletivas");
-		lblCostureira_2.setBounds(230, 125, 92, 14);
-		contentPane.add(lblCostureira_2);
+		lblFaixasRefletivas = new JLabel("Faixas Refletivas");
+		lblFaixasRefletivas.setBounds(230, 125, 92, 14);
+		contentPane.add(lblFaixasRefletivas);
 		
 		textFieldFaixasRefletivas = new JTextField();
 		textFieldFaixasRefletivas.setColumns(10);
 		textFieldFaixasRefletivas.setBounds(230, 150, 92, 20);
 		contentPane.add(textFieldFaixasRefletivas);
 		
-		lblCostureira_3 = new JLabel("Gola/Punho");
-		lblCostureira_3.setBounds(338, 125, 86, 14);
-		contentPane.add(lblCostureira_3);
+		lblGolaPunho = new JLabel("Gola/Punho");
+		lblGolaPunho.setBounds(338, 125, 86, 14);
+		contentPane.add(lblGolaPunho);
 		
 		textFieldGolaPunho = new JTextField();
 		textFieldGolaPunho.setColumns(10);
@@ -134,9 +147,9 @@ public class JCadastro extends JFrame {
 		textFieldSugestaoPreco.setBounds(32, 206, 86, 20);
 		contentPane.add(textFieldSugestaoPreco);
 		
-		lblCostureira_5 = new JLabel("Outras Descri\u00E7\u00F5es");
-		lblCostureira_5.setBounds(128, 181, 296, 14);
-		contentPane.add(lblCostureira_5);
+		lblOutrasDescricoes = new JLabel("Outras Descri\u00E7\u00F5es");
+		lblOutrasDescricoes.setBounds(128, 181, 296, 14);
+		contentPane.add(lblOutrasDescricoes);
 		
 		textFieldOutrasDescricoes = new JTextField();
 		textFieldOutrasDescricoes.setColumns(10);
@@ -148,25 +161,68 @@ public class JCadastro extends JFrame {
 		btnNewButtonCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				var produtoDAO = new ProdutoDAO();
-				produtoDAO.inserirProduto(new Produto(textFieldDescricao.getText(), textFieldMangas.getText(), 
-										textFieldConsumoTecido.getText(), textFieldConsumoAviamentos.getText(),
-										textFieldCostureira.getText(), textFieldAcabamento.getText(),
-										textFieldFaixasRefletivas.getText(), textFieldGolaPunho.getText(),
-										textFieldSugestaoPreco.getText(), textFieldOutrasDescricoes.getText()));
+				Produto produto = new Produto(textFieldDescricao.getText(), textFieldMangas.getText(), 
+						textFieldConsumoTecido.getText(), textFieldConsumoAviamentos.getText(),
+						textFieldCostureira.getText(), textFieldAcabamento.getText(),
+						textFieldFaixasRefletivas.getText(), textFieldGolaPunho.getText(),
+						textFieldSugestaoPreco.getText(), textFieldOutrasDescricoes.getText());
+
+				if (produtoSelecionado == null) {
+					
+					produtoDAO.inserirProduto(produto);
+						
+				} else {
+					
+					//NÃO ESTÁ ATUALIZANDO NA HORA NA TELA DE JPRINCIPAL. SO QUANDO FECHA E ABRE NOVAMENTE
+					produto.setId(produtoSelecionado.getId());
+					produtoDAO.alterarProduto(produtoSelecionado.getId(), produto);
+					
+				}
 				
 			}
 		});
+		
 		btnNewButtonCadastrar.setBounds(308, 284, 116, 23);
 		contentPane.add(btnNewButtonCadastrar);
 		
-		JLabel lblConsumoAviamentos = new JLabel("Consumo Aviamentos");
-		lblConsumoAviamentos.setBounds(308, 66, 116, 14);
-		contentPane.add(lblConsumoAviamentos);
+		JButton btnNewButtonExcluir = new JButton("Excluir");
 		
-		textFieldConsumoAviamentos = new JTextField();
-		textFieldConsumoAviamentos.setColumns(10);
-		textFieldConsumoAviamentos.setBounds(308, 91, 116, 20);
-		contentPane.add(textFieldConsumoAviamentos);
+		btnNewButtonExcluir.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				produtoDAO.excluirProduto(produtoSelecionado.getId());
+				
+			}
+			
+		});
+		
+		btnNewButtonExcluir.setForeground(new Color(255, 255, 255));
+		btnNewButtonExcluir.setBackground(new Color(255, 0, 0));
+		btnNewButtonExcluir.setBounds(32, 284, 116, 23);
+		contentPane.add(btnNewButtonExcluir);
+		
+		if (produtoSelecionado != null) {
+			
+			preencherCampos(produtoSelecionado);
+			
+		}
+		
+		
+	}
+	
+	public void preencherCampos (Produto produtoSelecionado) {
+		
+		textFieldDescricao.setText(produtoSelecionado.getDescricao());
+		textFieldMangas.setText(produtoSelecionado.getMangas());
+		textFieldConsumoTecido.setText(produtoSelecionado.getConsumoTecido());
+		textFieldConsumoAviamentos.setText(produtoSelecionado.getConsumoAviamentos());
+		textFieldCostureira.setText(produtoSelecionado.getCostureira());
+		textFieldAcabamento.setText(produtoSelecionado.getAcabamento());
+		textFieldFaixasRefletivas.setText(produtoSelecionado.getFaixasRefletivas());
+		textFieldGolaPunho.setText(produtoSelecionado.getGolaPunho());
+		textFieldSugestaoPreco.setText(produtoSelecionado.getSugestaoPreco());
+		textFieldOutrasDescricoes.setText(produtoSelecionado.getOutrasDescricoes());
+		
 	}
 }

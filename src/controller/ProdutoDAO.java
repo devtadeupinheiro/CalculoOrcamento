@@ -149,8 +149,11 @@ public class ProdutoDAO {
 			stmt.setString(i++, produto.getGolaPunho());
 			stmt.setString(i++, produto.getSugestaoPreco());
 			stmt.setString(i++, produto.getOutrasDescricoes());
+			stmt.setInt(i++, produto.getId());
 			stmt.execute();
-			con.commit();
+			//con.commit();  //Tirei esse código porque o autocommit está ligado
+			
+			JOptionPane.showMessageDialog(null, "Cliente alterado com sucesso!");
 			
 		} catch (SQLException e) {
 			
@@ -167,14 +170,14 @@ public class ProdutoDAO {
 	public void excluirProduto (int id) {
 		
 		this.con = conectarBanco();
-		String sql = "DELETE produto WHERE id = ?";
+		String sql = "DELETE FROM produto WHERE id = ?";
 		
 		try {
 			
 			stmt = this.con.prepareStatement(sql);
 			stmt.setInt(1, id);
 			stmt.execute();
-			con.commit();
+			//con.commit();  //Tirei esse código porque o autocommit está ligado
 			
 			JOptionPane.showMessageDialog(null, "Produto excluído com sucesso");
 			
