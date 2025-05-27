@@ -10,6 +10,7 @@ import controller.ProdutoDAO;
 import model.Produto;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -42,7 +43,7 @@ public class JCadastro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JCadastro frame = new JCadastro(null);
+					JCadastro frame = new JCadastro(null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +55,7 @@ public class JCadastro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JCadastro(Produto produtoSelecionado) {
+	public JCadastro(Produto produtoSelecionado, JPrincipal jPrincipal) {
 		
 		var produtoDAO = new ProdutoDAO();
 		
@@ -169,13 +170,39 @@ public class JCadastro extends JFrame {
 
 				if (produtoSelecionado == null) {
 					
-					produtoDAO.inserirProduto(produto);
+					if (!textFieldDescricao.getText().isBlank() && !textFieldMangas.getText().isBlank() && 
+						!textFieldConsumoTecido.getText().isBlank() && !textFieldConsumoAviamentos.getText().isBlank() &&
+						!textFieldCostureira.getText().isBlank() && !textFieldAcabamento.getText().isBlank() &&
+						!textFieldFaixasRefletivas.getText().isBlank() && !textFieldGolaPunho.getText().isBlank() &&
+						!textFieldSugestaoPreco.getText().isBlank() && !textFieldOutrasDescricoes.getText().isBlank()) {
+					
+						produtoDAO.inserirProduto(produto);
+						abrirTelaPrincipal(jPrincipal);
 						
+					} else {
+						
+						JOptionPane.showMessageDialog(null,"Existem campos vazios");
+						
+					}
+								
 				} else {
 					
-					//NÃO ESTÁ ATUALIZANDO NA HORA NA TELA DE JPRINCIPAL. SO QUANDO FECHA E ABRE NOVAMENTE
-					produto.setId(produtoSelecionado.getId());
-					produtoDAO.alterarProduto(produtoSelecionado.getId(), produto);
+					if (!textFieldDescricao.getText().isBlank() && !textFieldMangas.getText().isBlank() && 
+							!textFieldConsumoTecido.getText().isBlank() && !textFieldConsumoAviamentos.getText().isBlank() &&
+							!textFieldCostureira.getText().isBlank() && !textFieldAcabamento.getText().isBlank() &&
+							!textFieldFaixasRefletivas.getText().isBlank() && !textFieldGolaPunho.getText().isBlank() &&
+							!textFieldSugestaoPreco.getText().isBlank() && !textFieldOutrasDescricoes.getText().isBlank()) {
+						
+							//NÃO ESTÁ ATUALIZANDO NA HORA NA TELA DE JPRINCIPAL. SO QUANDO FECHA E ABRE NOVAMENTE
+							produto.setId(produtoSelecionado.getId());
+							produtoDAO.alterarProduto(produtoSelecionado.getId(), produto);
+							abrirTelaPrincipal(jPrincipal);
+							
+						} else {
+							
+							JOptionPane.showMessageDialog(null,"Existem campos vazios");
+							
+						}
 					
 				}
 				
@@ -192,6 +219,7 @@ public class JCadastro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				produtoDAO.excluirProduto(produtoSelecionado.getId());
+				abrirTelaPrincipal(jPrincipal);
 				
 			}
 			
@@ -200,11 +228,13 @@ public class JCadastro extends JFrame {
 		btnNewButtonExcluir.setForeground(new Color(255, 255, 255));
 		btnNewButtonExcluir.setBackground(new Color(255, 0, 0));
 		btnNewButtonExcluir.setBounds(32, 284, 116, 23);
+		btnNewButtonExcluir.setVisible(false);
 		contentPane.add(btnNewButtonExcluir);
 		
 		if (produtoSelecionado != null) {
 			
 			preencherCampos(produtoSelecionado);
+			btnNewButtonExcluir.setVisible(true);
 			
 		}
 		
@@ -225,4 +255,15 @@ public class JCadastro extends JFrame {
 		textFieldOutrasDescricoes.setText(produtoSelecionado.getOutrasDescricoes());
 		
 	}
+	
+	private void abrirTelaPrincipal (JPrincipal jPrincipal) {
+		
+		jPrincipal.dispose();
+		dispose();
+		jPrincipal = new JPrincipal();
+		jPrincipal.setLocationRelativeTo(jPrincipal);
+		jPrincipal.setVisible(true);
+		
+	}
+	
 }

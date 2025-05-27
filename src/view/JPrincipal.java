@@ -3,6 +3,8 @@ package view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -12,8 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.RowSorter;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import controller.ProdutoDAO;
 import model.ModeloTabela;
@@ -28,6 +33,8 @@ public class JPrincipal extends JFrame {
 	private JTextField textField;
 	private JTable table;
 	private ArrayList<Produto> produtos;
+	private JPrincipal jPrincipal;
+	private TableRowSorter<ModeloTabela> rowSorter;
 
 	/**
 	 * Launch the application.
@@ -50,6 +57,8 @@ public class JPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public JPrincipal() {
+		
+		this.jPrincipal = this;
 		
 		var produtoDao = new ProdutoDAO();
 		
@@ -77,7 +86,7 @@ public class JPrincipal extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				var jCadastro = new JCadastro(null); //Está nulo porque não é para atualização e sim para inclusão. Pois o construtor pede um produto como parametro
+				var jCadastro = new JCadastro(null, jPrincipal); //Está nulo porque não é para atualização e sim para inclusão. Pois o construtor pede um produto como parametro
 				jCadastro.setLocationRelativeTo(jCadastro); //Para abrir no centro
 				jCadastro.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //Fecha somente a tela de cadastro ao invés do sistema inteiro
 				jCadastro.setVisible(true);
@@ -88,6 +97,15 @@ public class JPrincipal extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			
+			public void keyPressed (KeyEvent e) {
+				
+				filtrar();
+				
+			}
+			
+		});
 		textField.setBounds(144, 43, 491, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -118,7 +136,7 @@ public class JPrincipal extends JFrame {
 						
 						//Pega a linha selecionada da tabela
 						Produto produtoSelecionado = produtoDao.consultarProduto(modeloTabela.getValueAt(table.getSelectedRow(), 0).toString());
-						var jCadastro = new JCadastro(produtoSelecionado);
+						var jCadastro = new JCadastro(produtoSelecionado, jPrincipal);
 						jCadastro.setLocationRelativeTo(jCadastro); //Para abrir no centro
 						jCadastro.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //Fecha somente a tela de cadastro ao invés do sistema inteiro
 						jCadastro.setVisible(true);
@@ -134,6 +152,26 @@ public class JPrincipal extends JFrame {
 			}
 			
 		});
+		rowSorter = new TableRowSorter<>(modeloTabela);
+		table.setRowSorter(rowSorter);
 		scrollPane.setViewportView(table);
 	}
+	
+	private void filtrar() {
+		
+		String busca = textField.getText().trim();
+		
+		if (busca.length() == 0) {
+			
+			rowSorter.setRowFilter(null);
+			
+		} else {
+			
+			rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + busca));
+			
+		}
+		
+	}
+	
+	
 }

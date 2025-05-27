@@ -7,5 +7,10 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/tadeu/Downloads/postgresql-42.7.5.jar" sourcepath="C:/Projetos/eclipse-workspace/CalculoOrcamento"/>
+	<classpathentry kind="lib" path="C:/Projetos/eclipse-workspace/CalculoOrcamento/resources/commons-beanutils-1.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Projetos/eclipse-workspace/CalculoOrcamento/resources/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Projetos/eclipse-workspace/CalculoOrcamento/resources/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Projetos/eclipse-workspace/CalculoOrcamento/resources/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Projetos/eclipse-workspace/CalculoOrcamento/resources/jasperreports-6.16.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
