@@ -92,9 +92,13 @@ public class JLogin extends JFrame {
 						
 						JOptionPane.showMessageDialog(btnNewButton, "Informações Válidas");
 						dispose();
-						JPrincipal jPrincipal = new JPrincipal();
+						JTelaAbertura jTelaAbertura = new JTelaAbertura();
+						jTelaAbertura.setLocationRelativeTo(jTelaAbertura);
+						jTelaAbertura.setVisible(true);
+						/*JPrincipal jPrincipal = new JPrincipal();
 						jPrincipal.setLocationRelativeTo(jPrincipal);
 						jPrincipal.setVisible(true);
+						*/
 						
 					}
 					
