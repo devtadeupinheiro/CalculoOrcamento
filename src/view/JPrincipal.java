@@ -155,6 +155,19 @@ public class JPrincipal extends JFrame {
 		rowSorter = new TableRowSorter<>(modeloTabela);
 		table.setRowSorter(rowSorter);
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButtonVoltar = new JButton("Voltar");
+		btnNewButtonVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+				JTelaAbertura.abrirJTelaAbertura(); //Metodo estatico criado em cada tela
+				
+			}
+		});
+		btnNewButtonVoltar.setBounds(29, 455, 85, 21);
+		contentPane.add(btnNewButtonVoltar);
+		
 	}
 	
 	private void filtrar() {

@@ -3,7 +3,7 @@ package main;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import model.BrimProfissionalPesado;
+import model.Tecido;
 import model.CustosPeca;
 import model.EscolhaItem;
 import model.Produto;
@@ -12,6 +12,7 @@ public class Execucao {
 	
 	public static void main (String[] args) {
 		
+		/*
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("Escolha abaixo qual o item:");
@@ -63,8 +64,8 @@ public class Execucao {
 			
 			var produto = new Produto();
 			produto.tipoManga("mangalonga");
-			
-			var tecido = new BrimProfissionalPesado();
+		
+			var tecido = new Tecido();
 			
 			var calculos = new Calculos();
 			BigDecimal preco = calculos.calculo(produto.getConsumoTecido(), produto.getConsumoAviamentos(), produto.getCostureira(), tecido);
@@ -86,8 +87,31 @@ public class Execucao {
 			precoProdutoFinal = precoProdutoFinal.add(custoPintura);
 			
 			System.out.println(precoProdutoFinal.toString());
-		}
+			
+			*/
 		
-	}
+		
+		}
+	
+	public BigDecimal calcularProduto (Produto produto, Tecido tecido, int quantidadePecas, int pinturaPequena, int pinturaGrande) {
+		
+		var calculos = new Calculos();
+		BigDecimal preco = calculos.calculo(produto.getConsumoTecido(), produto.getConsumoAviamentos(), produto.getCostureira(), tecido);
 
+		var custosPeca = new CustosPeca();
+		String precoTemp = custosPeca.calculoDespesas(quantidadePecas, produto);
+		BigDecimal custoCorte = custosPeca.custoCorte(quantidadePecas);
+		
+		var custoPintura = new BigDecimal(0);
+		custoPintura.add(custosPeca.pinturaMaisCores(pinturaPequena, pinturaGrande));
+
+		var precoProdutoFinal = new BigDecimal(0);
+		precoProdutoFinal = precoProdutoFinal.add(preco);
+		precoProdutoFinal = precoProdutoFinal.add(new BigDecimal(precoTemp));
+		precoProdutoFinal = precoProdutoFinal.add(custoCorte);
+		precoProdutoFinal = precoProdutoFinal.add(custoPintura);
+		
+		return precoProdutoFinal;
+	}
+		
 }

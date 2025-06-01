@@ -2,7 +2,7 @@ package main;
 
 import java.math.BigDecimal;
 
-import model.BrimProfissionalPesado;
+import model.Tecido;
 
 public class Calculos {
 	
@@ -22,8 +22,7 @@ public class Calculos {
 	}
 	
 	//criar classe para colocar despesas para incluir no calculo
-	//usar outra classe para numeros financeiros porque double da imprecisao
-	public BigDecimal calculo (String consumoTecido, String consumoAviamentos, String costureira, BrimProfissionalPesado tecido) {
+	public BigDecimal calculo (String consumoTecido, String consumoAviamentos, String costureira, Tecido tecido) {
 		
 
 		BigDecimal primeiroCusto = BigDecimal.ZERO;

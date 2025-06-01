@@ -1,12 +1,15 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -108,8 +111,9 @@ public class JSelecionar extends JFrame {
 						Produto produtoSelecionado = produtoDao.consultarProduto(modeloTabelaCalculo.getValueAt(table.getSelectedRow(), 0).toString());
 						var jCalculo = new JCalculo(produtoSelecionado);
 						jCalculo.setLocationRelativeTo(jCalculo); //Para abrir no centro
-						jCalculo.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //Fecha somente a tela de cadastro ao invés do sistema inteiro
+						jCalculo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 						jCalculo.setVisible(true);
+						dispose();
 						
 					} catch (Exception e1) {
 						
@@ -126,6 +130,20 @@ public class JSelecionar extends JFrame {
 		rowSorter = new TableRowSorter<>(modeloTabelaCalculo);
 		table.setRowSorter(rowSorter);
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButtonVoltar = new JButton("Voltar");
+		btnNewButtonVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+				JTelaAbertura.abrirJTelaAbertura(); //Metodo estatico criado em cada tela
+				
+			}
+		});
+		btnNewButtonVoltar.setBounds(29, 455, 85, 21);
+		contentPane.add(btnNewButtonVoltar);
+		
+		
 	}
 	
 	private void filtrar() {
@@ -141,6 +159,14 @@ public class JSelecionar extends JFrame {
 			rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + busca));
 			
 		}
+		
+	}
+	
+	public static void abrirJSelecionar () {
+		
+		JSelecionar jSelecionar = new JSelecionar();
+		jSelecionar.setLocationRelativeTo(jSelecionar);
+		jSelecionar.setVisible(true);
 		
 	}
 	

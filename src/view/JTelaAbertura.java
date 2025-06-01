@@ -23,6 +23,7 @@ public class JTelaAbertura extends JFrame {
 			public void run() {
 				try {
 					JTelaAbertura frame = new JTelaAbertura();
+					frame.setLocationRelativeTo(frame);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,5 +71,15 @@ public class JTelaAbertura extends JFrame {
 		});
 		btnCadastraralterar.setBounds(250, 11, 174, 23);
 		contentPane.add(btnCadastraralterar);
+		
+		
+	}
+	
+	public static void abrirJTelaAbertura () {
+		
+		JTelaAbertura jTelaAbertura = new JTelaAbertura();
+		jTelaAbertura.setLocationRelativeTo(jTelaAbertura);
+		jTelaAbertura.setVisible(true);
+		
 	}
 }

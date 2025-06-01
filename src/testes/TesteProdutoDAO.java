@@ -1,7 +1,5 @@
 package testes;
 
-import org.postgresql.util.PSQLException;
-
 import controller.*;
 import main.Calculos;
 import model.*;

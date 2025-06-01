@@ -20,15 +20,16 @@ public class ConexaoJdbc {
 	
 	public ConexaoJdbc () {
 		
-		nomeHost = "localhost";
-		usuario = "postgres";
-		senha = "Eusei2202@";
-		jdbcDriver = "org.postgresql.Driver";
-		nomeBanco = "app-orcamento";
-		prefixBanco = "jdbc:postgresql://";
-		portaBanco = "5432/";
+		//nomeHost = "localhost";
+		//usuario = "postgres";
+		//senha = "Eusei2202@";
+		jdbcDriver = "org.sqlite.JDBC";
+		//nomeBanco = "app-orcamento";
+		prefixBanco = "jdbc:sqlite:resources/bdclientes.db/";
+		//portaBanco = "5432/";
 		
-		url = prefixBanco + nomeHost + ":" + portaBanco + nomeBanco;
+		//url = prefixBanco + nomeHost + ":" + portaBanco + nomeBanco;
+		url = prefixBanco;
 		
 	}
 
@@ -44,7 +45,9 @@ public class ConexaoJdbc {
 			if (con == null) {
 				
 				Class.forName(jdbcDriver);
-				con = DriverManager.getConnection(url, usuario, senha);
+				//con = DriverManager.getConnection(url, usuario, senha);
+				con = DriverManager.getConnection(url);
+
 				
 			} else if (con.isClosed()){
 				
