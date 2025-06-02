@@ -1,8 +1,8 @@
 package testes;
 
 import controller.*;
-import main.Calculos;
 import model.*;
+import servicos.Calculos;
 public class TesteProdutoDAO {
 	
 	public static void main (String[] args) {

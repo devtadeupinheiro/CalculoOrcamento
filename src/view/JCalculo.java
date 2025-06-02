@@ -6,12 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controller.ProdutoDAO;
 import controller.TecidoDAO;
-import main.Execucao;
 import model.Produto;
 import model.Tecido;
-
+import servicos.Calculos;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -160,12 +158,12 @@ public class JCalculo extends JFrame {
 						//SELECIONAR O TECIDO				
 						int indiceSelecionado = comboBox.getSelectedIndex();
 						var tecidoSelecionado = new Tecido();
-						var execucaoCalculos = new Execucao();
+						var calculos = new Calculos();
 						try {
 							
 							tecidoSelecionado = tecidoDao.consultarTecido(tecidos.get(indiceSelecionado).getDescricao());
 							
-							BigDecimal precoProduto = execucaoCalculos.calcularProduto(produtoSelecionado, tecidoSelecionado, quantPecas, quantCoresP, quantCoresG);
+							BigDecimal precoProduto = calculos.calcularProduto(produtoSelecionado, tecidoSelecionado, quantPecas, quantCoresP, quantCoresG);
 							JOptionPane.showMessageDialog(btnNewButtonCalcular, "O preço do produto é: R$ " + precoProduto.toString());
 							
 						} catch (Exception e1) {
